@@ -14,10 +14,14 @@ angular
     .config(['$locationProvider', '$stateProvider', function ($locationProvider, $stateProvider) {
         $locationProvider.hashPrefix('!');
 
-        $stateProvider.state('recipes', { // state for showing all recipes
+        $stateProvider.state('recipes', {
             url: '/recipes',
             templateUrl: '../views/partials/recipes.html',
-            controller: 'RecipeController'
+            controller: 'RecipeListController'
+        }).state('users', {
+            url: '/users',
+            templateUrl: '../views/partials/users.html',
+            controller: 'UserListController'
         });
     }])
     .run(function ($state) {
