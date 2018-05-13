@@ -6,7 +6,6 @@ angular
         'ngResource',
         'cookBookApp.controllers',
         'cookBookApp.services',
-        'cookBookApp.version',
         'ui.router'
     ])
     .constant("config", {
