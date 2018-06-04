@@ -11,7 +11,7 @@ angular
         'angularUtils.directives.dirPagination'
     ])
     .constant("config", {
-        BASE_URL: "http://localhost:3000/api"
+        BASE_URL: "https://whispering-chamber-70370.herokuapp.com/api"
     })
     .config(['$locationProvider', '$stateProvider', '$urlRouterProvider', function ($locationProvider, $stateProvider, $urlRouterProvider) {
         // default route
