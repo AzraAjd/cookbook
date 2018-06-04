@@ -16,7 +16,7 @@
                         <a href="index.html">Home</a>
                     </li>
                     <li>
-                        <a href="about-us.html">About Us</a>
+                        <a ng-click="addrecipe()">Add Recipe</a>
                     </li>
                     <li>
                         <a href="contacts.html">Contacts</a>
@@ -28,7 +28,7 @@
             <div class="header-info">
                 <h1 class="title">Whether you’re looking for meal ideas or need a specific recipe</h1>
                 <div class="subtitle">We have 1000’s of recipes for all occasions</div>
-                <a href="about-us.html">About Us</a>
+                <a ng-click="addrecipe()">Add Recipe</a>
             </div>
         </div>
     </header>
@@ -37,27 +37,14 @@
         <div class="container">
             <div class="articles">
                 <div class="articles-header clearfix">
-                    <h2 class="title">RECEPTI</h2>
+                    <h1 class="title">RECEPTI</h1>
+                    <br/><br/>
                     <div class="articles-filter">
                         <ul>
-                            <li class="active">
-                                <a href="index.html">
-                                    Fast Food
-                                </a>
-                            </li>
-                            <li>
-                                <a href="index-category-organic-food.html">
-                                    Organic Food
-                                </a>
-                            </li>
-                            <li>
-                                <a href="index-category-salads.html">
-                                    Salads
-                                </a>
-                            </li>
-                            <li>
-                                <a href="index-category-hot-dishes.html">
-                                    Hot Dishes
+                            <a ng-click="filterRecipeCategories.category = ''">All | </a>
+                            <li ng-repeat="recipeCategory in recipeCategories">
+                                <a ng-click="filterRecipeCategories.category = recipeCategory">
+                                  {{recipeCategory}} |
                                 </a>
                             </li>
                         </ul>
@@ -65,10 +52,11 @@
                 </div>
                 <!-- /.articles-header -->
                 <div class="articles-items clearfix">
-                    <article class="articles-item" ng-repeat="recipe in recipes">
+                    <article class="articles-item" dir-paginate="recipe in recipes | itemsPerPage: 8 |
+                    filter:filterRecipeCategories | orderBy : '-created_date'">
                         <div class="articles-item-img">
                             <a href="full-page.html">
-                                <img src="img/sarma.jpg" alt="{{recipe.title}}">
+                                <img src="{{recipe.img_url}}" alt="{{recipe.title}}">
                             </a>
                         </div>
                         <div class="articles-item-description">
@@ -95,32 +83,8 @@
                 <!-- /.articles-items -->
             </div>
             <!-- /.articles -->
-            <div class="articles-pagination">
-                <nav aria-label="Page navigation">
-                    <ul class="pagination">
-                        <li>
-                            <a class="disabled" aria-label="Previous">
-                                <i class="fa fa-chevron-left fa-fw" aria-hidden="true"></i>
-                            </a>
-                        </li>
-                        <li class="active">
-                            <a>1</a>
-                        </li>
-                        <li>
-                            <a href="index-page-2.html">2</a>
-                        </li>
-                        <li>
-                            <a href="index-page-3.html">3</a>
-                        </li>
-                        <li>
-                            <a href="index-page-2.html" aria-label="Next">
-                                <i class="fa fa-chevron-right fa-fw" aria-hidden="true"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-            <!-- /.articles-pagination -->
+
+            <dir-pagination-controls></dir-pagination-controls>
         </div>
     </div>
     <!-- /.main -->
@@ -132,7 +96,7 @@
                         <a href="index.html">Home</a>
                     </li>
                     <li>
-                        <a href="about-us.html">About Us</a>
+                        <a ng-click="addrecipe()">Add Recipe</a>
                     </li>
                     <li>
                         <a href="contacts.html">Contacts</a>
@@ -144,18 +108,3 @@
     </footer>
 </div>
 <!-- /.wrapper -->
-
-<div>
-    <div><h2>Svi Recepti</h2></div>
-    <br/>
-</div>
-<div ng-repeat="recipe in recipes">
-    <h3>{{recipe.title}}</h3>
-    <ul>
-        <li>{{recipe.category[0]}}</li>
-        <li>{{recipe.ingredients}}</li>
-        <li>{{recipe.directions}}</li>
-        <li>{{recipe.ready_in}}</li>
-        <li>{{recipe.created_date}}</li>
-    </ul>
-</div>

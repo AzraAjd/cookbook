@@ -1,0 +1,97 @@
+<div class="wrapper">
+    <header class="header" style="background-image:url(img/topbg.jpg);background-position:top center;">
+        <div class="container clearfix">
+            <button class="nav-toggle">
+                <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
+            <div class="logo">
+                <a href="index.html">
+                    <img src="img/logo.png" alt="RECEPTI" height="18" width="94">
+                </a>
+            </div>
+            <nav id="nav">
+                <button class="nav-close">&times;</button>
+                <ul class="nav-top">
+                    <li class="active">
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li>
+                        <a ng-click="addrecipe()">Add Recipe</a>
+                    </li>
+                    <li>
+                        <a href="contacts.html">Contacts</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="container">
+            <div class="header-info">
+                <h1 class="title">Whether you’re looking for meal ideas or need a specific recipe</h1>
+                <div class="subtitle">We have 1000’s of recipes for all occasions</div>
+                <a ng-click="addrecipe()">Add recipe</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="main clearfix">
+        <div class="container">
+            <div class="col-sm-8 col-sm-offset-2">
+                <div class="page-header"><h1>Add Recipe</h1></div>
+                <!-- FORM -->
+                <form name="addRecipeForm" ng-submit="submitForm()">
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" name="title" class="form-control" ng-model="recipe.title">
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label>Category</label>
+                        <input type="text" name="category" class="form-control" ng-model="recipe.category">
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label>Ingredients</label>
+                        <input type="text" name="ingredients" class="form-control" ng-model="recipe.ingredients">
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label>Directions</label>
+                        <input type="text" name="directions" class="form-control" ng-model="recipe.directions">
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label>Ready In</label>
+                        <input type="text" name="ready_in" class="form-control" ng-model="recipe.ready_in">
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label>Image Url</label>
+                        <input type="text" name="img_url" class="form-control" ng-model="recipe.img_url">
+                    </div>
+                    <br/>
+                    <button type="submit" ng-click="dosubmit()">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- /.main -->
+    <footer class="footer">
+        <div class="container">
+            <nav>
+                <ul class="nav-footer">
+                    <li class="active">
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li>
+                        <a ng-click="addrecipe()">Add Recipe</a>
+                    </li>
+                    <li>
+                        <a href="contacts.html">Contacts</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="copyright">&copy; 2018 Copyright</div>
+        </div>
+    </footer>
+</div>
+<!-- /.wrapper -->

@@ -4,26 +4,47 @@
 angular
     .module('cookBookApp', [
         'ngResource',
+        'ngStorage',
         'cookBookApp.controllers',
         'cookBookApp.services',
-        'ui.router'
+        'ui.router',
+        'angularUtils.directives.dirPagination'
     ])
     .constant("config", {
-        BASE_URL: "http://localhost:3000"
+        BASE_URL: "http://localhost:3000/api"
     })
-    .config(['$locationProvider', '$stateProvider', function ($locationProvider, $stateProvider) {
+    .config(['$locationProvider', '$stateProvider', '$urlRouterProvider', function ($locationProvider, $stateProvider, $urlRouterProvider) {
+        // default route
+        $urlRouterProvider.otherwise("/");
+
         $locationProvider.hashPrefix('!');
 
         $stateProvider.state('recipes', {
             url: '/recipes',
             templateUrl: '../views/partials/recipes.html',
             controller: 'RecipeListController'
+        }).state('addrecipe', {
+            url: '/add-recipe',
+            templateUrl: '../views/partials/add-recipe.html',
+            controller: 'RecipeAddController'
         }).state('users', {
             url: '/users',
             templateUrl: '../views/partials/users.html',
             controller: 'UserListController'
         });
     }])
-    .run(function ($state) {
-        $state.go('recipes');
-    });
+    .run(['$rootScope', '$http', '$location', '$localStorage', '$state', function ($rootScope, $http, $location, $localStorage, $state) {
+        // keep user logged in after page refresh
+        if ($localStorage.currentUser) {
+            $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.currentUser.token;
+        }
+
+        // redirect to login page if not logged in and trying to access a restricted page
+        $rootScope.$on('$locationChangeStart', function (event, next, current) {
+            var publicPages = ['/login', '/recipes', '/add-recipe'];
+            var restrictedPage = publicPages.indexOf($location.path()) === -1;
+            if (restrictedPage && !$localStorage.currentUser) {
+                $state.go('recipes');
+            }
+        });
+    }]);
